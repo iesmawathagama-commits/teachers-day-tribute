@@ -395,9 +395,9 @@ button {
   font-family: "F3", serif;
 
   font-size: clamp(
-    0.95rem,
-    2.35vw,
-    1.5625rem
+    0.75rem,
+    1.8vw,
+    1.2rem
   );
 
   line-height: 1.38;
