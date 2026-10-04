@@ -1108,7 +1108,7 @@ function showLetterScene() {
     letterMessageBox.style.top = "25%";
 
 
-    letterMessageBox.style.left = "61%";
+    letterMessageBox.style.left = "58%";
 
     /*
      * IMPORTANT:
