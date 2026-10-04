@@ -2,7 +2,13 @@
    HAPPY TEACHERS' DAY — INTERACTIVE TRIBUTE
    ========================================================= */
 
+
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
+
 const experience = document.getElementById("experience");
+
 const sceneBg = document.getElementById("scene-bg");
 
 const introTitle = document.getElementById("intro-title");
@@ -18,22 +24,14 @@ const flowerButtons = document.querySelectorAll(".flower-hit");
 const particleCanvas = document.getElementById("particle-canvas");
 
 const letterScene = document.getElementById("letter-scene");
-const letterMessageBox =
-    document.getElementById("letter-message-box");
-const letterMessage =
-    document.getElementById("letter-message");
+const letterMessageBox = document.getElementById("letter-message-box");
+const letterMessage = document.getElementById("letter-message");
+const finishButton = document.getElementById("finish-button");
 
-const finishButton =
-    document.getElementById("finish-button");
+const finalScene = document.getElementById("final-scene");
+const finalLogo = document.getElementById("final-logo");
 
-const finalScene =
-    document.getElementById("final-scene");
-
-const finalLogo =
-    document.getElementById("final-logo");
-
-const portraitWarning =
-    document.getElementById("portrait-warning");
+const portraitWarning = document.getElementById("portrait-warning");
 
 
 /* =========================================================
@@ -61,20 +59,31 @@ const FINAL_BG = "assets/final-bg.png";
 
 
 /* =========================================================
-   MESSAGES
+   TEACHER MESSAGES
    ========================================================= */
 
 const teacherMessages = [
+
     "Dear Teacher, thank you for turning ordinary lessons into little adventures.",
+
     "Dear Teacher, thank you for adding a little spark to every page, lesson, and classroom moment.",
+
     "Dear Teacher, thank you for making learning something we look forward to.",
+
     "Dear Teacher, thank you for turning our little efforts into moments we could be proud of.",
+
     "Dear Teacher, thank you for teaching us with patience, kindness, and a heart that truly cares.",
+
     "Dear Teacher, thank you for inspiring us to keep trying when things did not come easily.",
+
     "Dear Teacher, thank you for making the classroom a place where curiosity always had a home.",
+
     "Dear Teacher, thank you for making knowledge feel like an adventure.",
+
     "Dear Teacher, thank you for celebrating our progress, no matter how small it seemed.",
+
     "Dear Teacher, thank you for giving us memories we will carry far beyond the classroom."
+
 ];
 
 
@@ -83,28 +92,39 @@ const teacherMessages = [
    ========================================================= */
 
 let currentBackground = BG1;
+
 let flowerLocked = false;
+
 let experienceFinished = false;
 
 
 /* =========================================================
-   GENERAL HELPERS
+   GENERAL HELPER
    ========================================================= */
 
 function wait(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+
 }
 
 
 /* =========================================================
-   BACKGROUND TRANSITION
+   BACKGROUND CROSSFADE
+   =========================================================
+   
+   Used for:
+   BG1 → BG2
+   BG2 → BG3
+   BG3 → Letter Background
+
+   The current background remains visible underneath
+   while the new background fades IN.
    ========================================================= */
 
-function crossfadeBackground(
-    newBackground,
-    duration = 1400,
-    backgroundSize = "cover"
-) {
+function crossfadeBackground(newBackground, duration = 1400) {
 
     return new Promise(resolve => {
 
@@ -113,8 +133,7 @@ function crossfadeBackground(
             return;
         }
 
-        const nextBg =
-            document.createElement("div");
+        const nextBg = document.createElement("div");
 
         nextBg.style.position = "absolute";
         nextBg.style.inset = "0";
@@ -124,14 +143,9 @@ function crossfadeBackground(
         nextBg.style.backgroundImage =
             `url("${newBackground}")`;
 
-        nextBg.style.backgroundSize =
-            backgroundSize;
-
-        nextBg.style.backgroundPosition =
-            "center";
-
-        nextBg.style.backgroundRepeat =
-            "no-repeat";
+        nextBg.style.backgroundSize = "100% 100%";
+        nextBg.style.backgroundPosition = "center";
+        nextBg.style.backgroundRepeat = "no-repeat";
 
         nextBg.style.opacity = "0";
 
@@ -147,7 +161,9 @@ function crossfadeBackground(
         nextBg.offsetHeight;
 
         requestAnimationFrame(() => {
+
             nextBg.style.opacity = "1";
+
         });
 
         setTimeout(() => {
@@ -155,21 +171,19 @@ function crossfadeBackground(
             sceneBg.style.backgroundImage =
                 `url("${newBackground}")`;
 
-            sceneBg.style.backgroundSize =
-                backgroundSize;
-
             sceneBg.style.opacity = "1";
             sceneBg.style.zIndex = "0";
 
-            currentBackground =
-                newBackground;
+            currentBackground = newBackground;
 
             nextBg.remove();
 
             resolve();
 
         }, duration + 50);
+
     });
+
 }
 
 
@@ -185,6 +199,7 @@ function showScene(scene) {
         "aria-hidden",
         "false"
     );
+
 }
 
 
@@ -196,74 +211,73 @@ function hideScene(scene) {
         "aria-hidden",
         "true"
     );
+
 }
 
 
 /* =========================================================
-   TITLE
+   OPENING TITLE
    ========================================================= */
 
 async function showOpeningScene() {
 
+    /*
+     * Initial background
+     */
+
     sceneBg.style.backgroundImage =
         `url("${BG1}")`;
 
-    sceneBg.style.backgroundSize =
-        "cover";
-
-    sceneBg.style.backgroundPosition =
-        "center";
-
-    sceneBg.style.backgroundRepeat =
-        "no-repeat";
-
     sceneBg.style.opacity = "1";
+
     sceneBg.style.zIndex = "0";
 
     currentBackground = BG1;
 
 
-    /* IMPORTANT:
-       This is your original title scene. */
+    /*
+     * Show title
+     */
 
     showScene(introTitle);
-
-
-    /* Exact title */
 
     titleText.textContent =
         "Happy Teachers' Day";
 
-
-    titleText.classList.remove(
-        "visible"
-    );
+    titleText.classList.remove("visible");
 
 
     await wait(100);
 
 
-    /* Fade title IN */
+    /*
+     * Fade title IN
+     */
 
-    titleText.classList.add(
-        "visible"
-    );
+    titleText.classList.add("visible");
 
+
+    /*
+     * Keep title visible
+     */
 
     await wait(4000);
 
 
-    /* Fade title OUT */
+    /*
+     * Fade title OUT
+     */
 
-    titleText.classList.remove(
-        "visible"
-    );
+    titleText.classList.remove("visible");
 
+
+    /*
+     * BG1 → BG2
+     */
 
     await crossfadeBackground(
         BG2,
-        1400,
-        "cover"
+        1400
     );
 
 
@@ -274,6 +288,7 @@ async function showOpeningScene() {
 
 
     startIntroMessage();
+
 }
 
 
@@ -285,6 +300,7 @@ async function displayIntroPart(lines) {
 
     introLine.innerHTML = "";
 
+
     lines.forEach(line => {
 
         const div =
@@ -293,60 +309,105 @@ async function displayIntroPart(lines) {
         div.textContent = line;
 
         introLine.appendChild(div);
+
     });
 
 
     showScene(introMessage);
 
+
     await wait(100);
+
 
     introLine.style.opacity = "1";
 
+
     await wait(3000);
+
 
     introLine.style.opacity = "0";
 
+
     await wait(900);
 
+
     hideScene(introMessage);
+
 }
 
 
 async function startIntroMessage() {
 
+    /*
+     * PART 1
+     */
+
     await displayIntroPart([
+
         "This little tribute",
+
         "has been created especially for you,"
+
     ]);
 
 
+    /*
+     * PART 2
+     */
+
     await displayIntroPart([
+
         "to celebrate you",
+
         "and the wonderful work",
+
         "you do every day."
+
     ]);
 
 
+    /*
+     * PART 3
+     */
+
     await displayIntroPart([
+
         "On this special day,",
+
         "we simply wanted to pause",
+
         "for a moment and say:"
+
     ]);
 
+
+    /*
+     * FINAL INTRO MESSAGE
+     */
 
     await displayIntroPart([
+
         "Thank you, Teacher."
+
     ]);
 
+
+    /*
+     * BG2 → BG3
+     */
 
     await crossfadeBackground(
         BG3,
-        1400,
-        "100% 100%"
+        1400
     );
 
 
+    /*
+     * Show flowers
+     */
+
     showFlowerScene();
+
 }
 
 
@@ -360,13 +421,16 @@ function showFlowerScene() {
 
     flowerLocked = false;
 
+
     flowerButtons.forEach(button => {
 
         button.disabled = false;
 
         button.style.pointerEvents =
             "auto";
+
     });
+
 }
 
 
@@ -388,6 +452,10 @@ function selectFlower(
     }
 
 
+    /*
+     * Lock all flowers immediately.
+     */
+
     flowerLocked = true;
 
 
@@ -397,8 +465,14 @@ function selectFlower(
 
         button.style.pointerEvents =
             "none";
+
     });
 
+
+    /*
+     * Magical particles begin exactly
+     * from the user's touch/click.
+     */
 
     createParticles(
         clickX,
@@ -406,10 +480,24 @@ function selectFlower(
     );
 
 
+    /*
+     * Keep the flower scene visible
+     * during the particle effect.
+     */
+
     setTimeout(async () => {
+
+        /*
+         * Hide flowers only after
+         * the particle effect has played.
+         */
 
         hideScene(flowerScene);
 
+
+        /*
+         * Find the selected letter background.
+         */
 
         const selectedBackground =
             LETTER_BACKGROUNDS[
@@ -417,16 +505,147 @@ function selectFlower(
             ];
 
 
-        await crossfadeBackground(
-            selectedBackground,
-            1400,
-            "100% 100%"
+        /*
+         * -------------------------------------------------
+         * IMPORTANT
+         * -------------------------------------------------
+         *
+         * The letter background is now NOT permanently
+         * stored in sceneBg.
+         *
+         * Instead, it is placed directly on letterScene.
+         *
+         * This guarantees that the letter background
+         * remains visible until Finish is pressed.
+         * -------------------------------------------------
+         */
+
+
+        /*
+         * Set the letter scene background.
+         */
+
+        letterScene.style.backgroundImage =
+            `url("${selectedBackground}")`;
+
+        letterScene.style.backgroundSize =
+            "100% 100%";
+
+        letterScene.style.backgroundPosition =
+            "center";
+
+        letterScene.style.backgroundRepeat =
+            "no-repeat";
+
+
+        /*
+         * Create temporary letter background
+         * for the gentle fade-in.
+         */
+
+        const nextLetterBg =
+            document.createElement("div");
+
+
+        nextLetterBg.style.position =
+            "absolute";
+
+        nextLetterBg.style.inset = "0";
+
+        nextLetterBg.style.width = "100%";
+
+        nextLetterBg.style.height = "100%";
+
+
+        nextLetterBg.style.backgroundImage =
+            `url("${selectedBackground}")`;
+
+        nextLetterBg.style.backgroundSize =
+            "100% 100%";
+
+        nextLetterBg.style.backgroundPosition =
+            "center";
+
+        nextLetterBg.style.backgroundRepeat =
+            "no-repeat";
+
+
+        /*
+         * Start invisible.
+         */
+
+        nextLetterBg.style.opacity =
+            "0";
+
+
+        nextLetterBg.style.transition =
+            "opacity 1400ms ease-in-out";
+
+
+        /*
+         * Put it above the current background.
+         */
+
+        nextLetterBg.style.zIndex =
+            "1";
+
+
+        experience.appendChild(
+            nextLetterBg
         );
 
+
+        /*
+         * Start the gentle fade-in.
+         */
+
+        requestAnimationFrame(() => {
+
+            nextLetterBg.style.opacity =
+                "1";
+
+        });
+
+
+        /*
+         * Wait until fade is complete.
+         */
+
+        await wait(1450);
+
+
+        /*
+         * Remove temporary transition layer.
+         *
+         * The permanent letterScene background
+         * is now underneath.
+         */
+
+        nextLetterBg.remove();
+
+
+        /*
+         * Bring letter scene above everything.
+         */
+
+        letterScene.style.zIndex =
+            "10";
+
+        letterScene.style.opacity =
+            "1";
+
+        letterScene.style.transition =
+            "";
+
+
+        /*
+         * Show letter and message.
+         */
 
         showLetterScene();
 
     }, 2000);
+
 }
 
 
@@ -442,6 +661,7 @@ flowerButtons.forEach(button => {
 
             event.preventDefault();
 
+
             const flowerNumber =
                 Number(
                     button.dataset.flower
@@ -449,12 +669,18 @@ flowerButtons.forEach(button => {
 
 
             selectFlower(
+
                 flowerNumber,
+
                 event.clientX,
+
                 event.clientY
+
             );
+
         }
     );
+
 });
 
 
@@ -474,6 +700,11 @@ flowerGrid.addEventListener(
         }
 
 
+        /*
+         * If an actual flower button
+         * was clicked, its own event handles it.
+         */
+
         if (
             event.target.closest(
                 ".flower-hit"
@@ -488,50 +719,62 @@ flowerGrid.addEventListener(
 
 
         const x =
-            event.clientX -
-            rect.left;
-
+            event.clientX - rect.left;
 
         const y =
-            event.clientY -
-            rect.top;
+            event.clientY - rect.top;
 
 
         const column =
             Math.max(
+
                 0,
+
                 Math.min(
+
                     4,
+
                     Math.floor(
                         (x / rect.width) * 5
                     )
+
                 )
+
             );
 
 
         const row =
             Math.max(
+
                 0,
+
                 Math.min(
+
                     1,
+
                     Math.floor(
                         (y / rect.height) * 2
                     )
+
                 )
+
             );
 
 
         const flowerNumber =
-            row * 5 +
-            column +
-            1;
+            row * 5 + column + 1;
 
 
         selectFlower(
+
             flowerNumber,
+
             event.clientX,
+
             event.clientY
+
         );
+
     }
 );
 
@@ -561,6 +804,11 @@ function createParticles(
 
     const particles = [];
 
+
+    /*
+     * Delicate magical particles.
+     */
+
     const count = 48;
 
 
@@ -586,13 +834,12 @@ function createParticles(
 
             x:
                 originX +
-                (Math.random() - 0.5) *
-                10,
+                (Math.random() - 0.5) * 10,
 
             y:
                 originY +
-                (Math.random() - 0.5) *
-                10,
+                (Math.random() - 0.5) * 10,
+
 
             vx:
                 Math.cos(angle) *
@@ -602,22 +849,28 @@ function createParticles(
                 Math.sin(angle) *
                 speed,
 
+
             size:
                 Math.random() *
                 1.8 +
                 0.7,
 
+
             life: 1,
+
 
             decay:
                 Math.random() *
                 0.012 +
                 0.008,
 
+
             drift:
                 (Math.random() - 0.5) *
                 0.018
+
         });
+
     }
 
 
@@ -632,10 +885,15 @@ function createParticles(
 
 
         ctx.clearRect(
+
             0,
+
             0,
+
             canvas.width,
+
             canvas.height
+
         );
 
 
@@ -667,36 +925,62 @@ function createParticles(
                 }
 
 
+                /*
+                 * Soft white glow.
+                 */
+
                 const glow =
                     ctx.createRadialGradient(
+
                         particle.x,
+
                         particle.y,
+
                         0,
+
                         particle.x,
+
                         particle.y,
+
                         particle.size * 4
+
                     );
 
 
                 glow.addColorStop(
+
                     0,
-                    `rgba(255,255,255,${
-                        particle.life * 0.95
-                    })`
+
+                    `rgba(
+                        255,
+                        255,
+                        255,
+                        ${particle.life * 0.95}
+                    )`
+
                 );
 
 
                 glow.addColorStop(
+
                     0.35,
-                    `rgba(255,255,255,${
-                        particle.life * 0.45
-                    })`
+
+                    `rgba(
+                        255,
+                        255,
+                        255,
+                        ${particle.life * 0.45}
+                    )`
+
                 );
 
 
                 glow.addColorStop(
+
                     1,
+
                     "rgba(255,255,255,0)"
+
                 );
 
 
@@ -708,38 +992,56 @@ function createParticles(
 
 
                 ctx.arc(
+
                     particle.x,
+
                     particle.y,
+
                     particle.size * 4,
+
                     0,
+
                     Math.PI * 2
+
                 );
 
 
                 ctx.fill();
 
 
-                /* Tiny bright center */
+                /*
+                 * Bright center.
+                 */
 
                 ctx.fillStyle =
-                    `rgba(255,255,255,${
-                        particle.life * 0.9
-                    })`;
+                    `rgba(
+                        255,
+                        255,
+                        255,
+                        ${particle.life * 0.9}
+                    )`;
 
 
                 ctx.beginPath();
 
 
                 ctx.arc(
+
                     particle.x,
+
                     particle.y,
+
                     particle.size * 0.55,
+
                     0,
+
                     Math.PI * 2
+
                 );
 
 
                 ctx.fill();
+
             }
         );
 
@@ -753,18 +1055,26 @@ function createParticles(
         } else {
 
             ctx.clearRect(
+
                 0,
+
                 0,
+
                 canvas.width,
+
                 canvas.height
+
             );
+
         }
+
     }
 
 
     requestAnimationFrame(
         animate
     );
+
 }
 
 
@@ -774,17 +1084,43 @@ function createParticles(
 
 function showLetterScene() {
 
-    letterMessageBox.style.top =
-        "38%";
+    /*
+     * Position of message.
+     */
 
-    letterMessageBox.style.left =
-        "54%";
+    letterMessageBox.style.top = "25%";
+
+
+    letterMessageBox.style.left = "54%";
+
+    /*
+     * IMPORTANT:
+     *
+     * Keep letterScene completely visible.
+     *
+     * Its background stays here permanently
+     * until Finish is clicked.
+     */
+
+    letterScene.style.opacity =
+        "1";
+
+    letterScene.style.visibility =
+        "visible";
+
+    letterScene.style.transition =
+        "";
 
 
     showScene(letterScene);
 
 
+    /*
+     * Start teacher message.
+     */
+
     displayTeacherMessage();
+
 }
 
 
@@ -792,19 +1128,18 @@ function showLetterScene() {
    MESSAGE FORMATTER
    ========================================================= */
 
-/*
-   IMPORTANT CHANGE:
+function formatTeacherMessage(
+    message
+) {
 
-   We no longer create a separate DOM element
-   for every line.
+    letterMessage.innerHTML =
+        "";
 
-   The entire letter is kept as ONE text node.
 
-   This removes the stutter/reflow that happened
-   whenever a new line started.
-*/
-
-function formatTeacherMessage(message) {
+    /*
+     * Remove "Dear Teacher,"
+     * from original message.
+     */
 
     let remaining =
         message
@@ -824,6 +1159,10 @@ function formatTeacherMessage(message) {
     let currentLine = [];
 
 
+    /*
+     * Maximum 4 words per line.
+     */
+
     words.forEach(word => {
 
         currentLine.push(word);
@@ -838,7 +1177,9 @@ function formatTeacherMessage(message) {
             );
 
             currentLine = [];
+
         }
+
     });
 
 
@@ -849,22 +1190,76 @@ function formatTeacherMessage(message) {
         lines.push(
             currentLine.join(" ")
         );
+
     }
 
 
     /*
-       One continuous text string.
+     * Dear Teacher
+     */
 
-       Newlines are real line breaks,
-       not separate HTML elements.
-    */
+    const dearLine =
+        document.createElement(
+            "div"
+        );
 
-    return (
-        "Dear Teacher,\n\n" +
-        lines.join("\n") +
-        "\n\n" +
-        "Happy Teachers' Day"
+    dearLine.className =
+        "message-line";
+
+    dearLine.textContent =
+        "Dear Teacher,";
+
+
+    letterMessage.appendChild(
+        dearLine
     );
+
+
+    /*
+     * Main message
+     */
+
+    lines.forEach(line => {
+
+        const lineElement =
+            document.createElement(
+                "div"
+            );
+
+        lineElement.className =
+            "message-line";
+
+        lineElement.textContent =
+            line;
+
+
+        letterMessage.appendChild(
+            lineElement
+        );
+
+    });
+
+
+    /*
+     * Closing
+     */
+
+    const closingLine =
+        document.createElement(
+            "div"
+        );
+
+    closingLine.className =
+        "message-line message-closing";
+
+    closingLine.textContent =
+        "Happy Teachers' Day";
+
+
+    letterMessage.appendChild(
+        closingLine
+    );
+
 }
 
 
@@ -874,82 +1269,145 @@ function formatTeacherMessage(message) {
 
 async function displayTeacherMessage() {
 
+    /*
+     * Select random message.
+     */
+
     const randomIndex =
         Math.floor(
+
             Math.random() *
             teacherMessages.length
+
         );
 
 
     const selectedMessage =
-        teacherMessages[randomIndex];
+        teacherMessages[
+            randomIndex
+        ];
 
-
-    const formattedMessage =
-        formatTeacherMessage(
-            selectedMessage
-        );
-
-
-    await typeLetterMessage(
-        formattedMessage
-    );
-}
-
-
-/* =========================================================
-   SMOOTH CONTINUOUS LETTER TYPE EFFECT
-   ========================================================= */
-
-async function typeLetterMessage(
-    text
-) {
 
     /*
-       Clear the message ONCE.
+     * Format message.
+     */
 
-       After that, only the textContent
-       of the SAME element changes.
+    formatTeacherMessage(
+        selectedMessage
+    );
 
-       This prevents the line-start stutter.
-    */
-
-    letterMessage.textContent = "";
 
     letterMessage.style.opacity =
         "1";
 
 
-    let visibleText = "";
+    /*
+     * Get every message line.
+     */
+
+    const lines =
+        Array.from(
+
+            letterMessage.querySelectorAll(
+                ".message-line"
+            )
+
+        );
 
 
-    const speed = 75;
+    /*
+     * Initially hide lines.
+     */
 
+    lines.forEach(line => {
+
+        line.style.opacity =
+            "0";
+
+    });
+
+
+    /*
+     * Type each line.
+     */
 
     for (
-        let index = 0;
-        index < text.length;
-        index++
+        const line of lines
     ) {
 
-        visibleText +=
-            text.charAt(index);
+        await typeLine(line);
+
+        await wait(180);
+
+    }
+
+}
 
 
-        letterMessage.textContent =
-            visibleText;
+/* =========================================================
+   TYPEWRITER EFFECT
+   ========================================================= */
+
+function typeLine(element) {
+
+    return new Promise(resolve => {
+
+        const text =
+            element.textContent;
+
+
+        element.textContent =
+            "";
+
+
+        element.style.opacity =
+            "1";
+
+
+        let index = 0;
 
 
         /*
-           Spaces and line breaks use the
-           same timing as every other character.
+         * Typing speed.
+         */
 
-           There is no special pause when
-           a new line begins.
-        */
+        const speed = 75;
 
-        await wait(speed);
-    }
+
+        function typeCharacter() {
+
+            if (
+                index < text.length
+            ) {
+
+                element.textContent +=
+                    text.charAt(index);
+
+
+                index++;
+
+
+                setTimeout(
+
+                    typeCharacter,
+
+                    speed
+
+                );
+
+            } else {
+
+                resolve();
+
+            }
+
+        }
+
+
+        typeCharacter();
+
+    });
+
 }
 
 
@@ -963,6 +1421,27 @@ finishButton.addEventListener(
 );
 
 
+/* =========================================================
+   FINISH EXPERIENCE
+   =========================================================
+
+   NOTHING HAPPENS HERE UNTIL THE
+   FINISH BUTTON IS ACTUALLY PRESSED.
+
+   Letter background remains completely
+   visible until this function runs.
+
+   Then:
+
+   LETTER BG
+        ↓
+   gentle fade
+        ↓
+   FINAL BG
+        ↓
+   logo reveal
+   ========================================================= */
+
 async function finishExperience() {
 
     if (experienceFinished) {
@@ -970,47 +1449,54 @@ async function finishExperience() {
     }
 
 
-    experienceFinished = true;
+    /*
+     * Lock experience.
+     */
+
+    experienceFinished =
+        true;
 
 
-    finishButton.disabled = true;
+    finishButton.disabled =
+        true;
 
     finishButton.style.pointerEvents =
         "none";
 
 
     /*
-       Button bounce
-    */
-
-    finishButton.classList.remove(
-        "pressed"
-    );
-
-    void finishButton.offsetWidth;
-
-    finishButton.classList.add(
-        "pressed"
-    );
-
+     * -----------------------------------------------------
+     * CREATE FINAL BACKGROUND
+     * -----------------------------------------------------
+     */
 
     const nextBg =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     nextBg.style.position =
         "absolute";
 
-    nextBg.style.inset = "0";
+    nextBg.style.inset =
+        "0";
 
-    nextBg.style.width = "100%";
+    nextBg.style.width =
+        "100%";
 
-    nextBg.style.height = "100%";
+    nextBg.style.height =
+        "100%";
 
 
     nextBg.style.backgroundImage =
         `url("${FINAL_BG}")`;
 
+
+    /*
+     * Keep the same Final BG appearance
+     * that was previously working.
+     */
 
     nextBg.style.backgroundSize =
         "cover";
@@ -1022,14 +1508,28 @@ async function finishExperience() {
         "no-repeat";
 
 
-    nextBg.style.opacity = "0";
+    /*
+     * Start completely invisible.
+     */
 
+    nextBg.style.opacity =
+        "0";
+
+
+    /*
+     * Gentle transition.
+     */
 
     nextBg.style.transition =
         "opacity 1400ms ease-in-out";
 
 
-    nextBg.style.zIndex = "1";
+    /*
+     * Put FINAL BG above the letter.
+     */
+
+    nextBg.style.zIndex =
+        "11";
 
 
     experience.appendChild(
@@ -1037,48 +1537,90 @@ async function finishExperience() {
     );
 
 
+    /*
+     * -----------------------------------------------------
+     * LETTER REMAINS VISIBLE UNDERNEATH
+     * -----------------------------------------------------
+     */
+
     letterScene.style.zIndex =
         "10";
 
+    letterScene.style.opacity =
+        "1";
+
+
+    /*
+     * -----------------------------------------------------
+     * START FINAL TRANSITION
+     * -----------------------------------------------------
+     */
 
     requestAnimationFrame(() => {
+
+        /*
+         * Final BG gently fades IN.
+         */
 
         nextBg.style.opacity =
             "1";
 
 
+        /*
+         * Letter gently fades OUT
+         * at exactly the same time.
+         */
+
         letterScene.style.transition =
             "opacity 1400ms ease-in-out";
 
-
         letterScene.style.opacity =
             "0";
+
     });
 
+
+    /*
+     * Wait for the transition.
+     */
 
     await wait(1450);
 
 
+    /*
+     * -----------------------------------------------------
+     * MAKE FINAL BG PERMANENT
+     * -----------------------------------------------------
+     */
+
     sceneBg.style.backgroundImage =
         `url("${FINAL_BG}")`;
 
+    sceneBg.style.opacity =
+        "1";
 
-    sceneBg.style.backgroundSize =
-        "cover";
-
-    sceneBg.style.opacity = "1";
-
-    sceneBg.style.zIndex = "0";
+    sceneBg.style.zIndex =
+        "0";
 
 
     currentBackground =
         FINAL_BG;
 
 
+    /*
+     * Remove temporary final background.
+     */
+
     nextBg.remove();
 
 
-    hideScene(letterScene);
+    /*
+     * Hide letter scene.
+     */
+
+    hideScene(
+        letterScene
+    );
 
 
     letterScene.style.transition =
@@ -1088,157 +1630,75 @@ async function finishExperience() {
         "";
 
 
-    showScene(finalScene);
+    /*
+     * -----------------------------------------------------
+     * FINAL LOGO
+     * -----------------------------------------------------
+     */
+
+    showScene(
+        finalScene
+    );
 
 
     finalScene.style.zIndex =
         "10";
 
 
+    /*
+     * Reset logo animation.
+     */
+
     finalLogo.style.opacity =
         "0";
 
-    finalLogo.style.transform =
-        "scale(0.96)";
+    finalLogo.classList.remove(
+        "reveal"
+    );
 
 
-    finalLogo.style.transition =
-        "opacity 2200ms ease, transform 2200ms ease";
-
-
-    await wait(150);
-
+    /*
+     * Start logo reveal.
+     */
 
     requestAnimationFrame(() => {
 
-        finalLogo.style.opacity =
-            "1";
+        finalLogo.classList.add(
+            "reveal"
+        );
 
-        finalLogo.style.transform =
-            "scale(1)";
     });
 
-
-    await wait(2400);
-
-
-    finalLogo.style.transition =
-        "none";
-
-    finalLogo.style.opacity =
-        "1";
-
-    finalLogo.style.transform =
-        "scale(1)";
-
-
-    document.body.style.pointerEvents =
-        "none";
 }
 
 
 /* =========================================================
-   PORTRAIT WARNING
+   START EXPERIENCE
    ========================================================= */
 
-function updateOrientation() {
+window.addEventListener(
+    "load",
+    () => {
 
-    const portrait =
-        window.innerHeight >
-        window.innerWidth;
+        /*
+         * Make sure final scene is hidden
+         * when the page first loads.
+         */
+
+        hideScene(finalScene);
+
+        hideScene(letterScene);
+
+        hideScene(flowerScene);
+
+        hideScene(introMessage);
 
 
-    if (portrait) {
+        /*
+         * Start opening sequence.
+         */
 
-        portraitWarning.style.display =
-            "flex";
+        showOpeningScene();
 
-    } else {
-
-        portraitWarning.style.display =
-            "none";
     }
-}
-
-
-window.addEventListener(
-    "resize",
-    updateOrientation
 );
-
-
-window.addEventListener(
-    "orientationchange",
-    updateOrientation
-);
-
-
-updateOrientation();
-
-
-/* =========================================================
-   INITIAL SETUP
-   ========================================================= */
-
-sceneBg.style.backgroundImage =
-    `url("${BG1}")`;
-
-sceneBg.style.backgroundSize =
-    "cover";
-
-sceneBg.style.backgroundPosition =
-    "center";
-
-sceneBg.style.backgroundRepeat =
-    "no-repeat";
-
-sceneBg.style.opacity =
-    "1";
-
-sceneBg.style.zIndex =
-    "0";
-
-
-currentBackground =
-    BG1;
-
-
-introTitle.classList.remove(
-    "active"
-);
-
-introMessage.classList.remove(
-    "active"
-);
-
-flowerScene.classList.remove(
-    "active"
-);
-
-letterScene.classList.remove(
-    "active"
-);
-
-finalScene.classList.remove(
-    "active"
-);
-
-
-titleText.classList.remove(
-    "visible"
-);
-
-
-introLine.style.opacity =
-    "0";
-
-
-finalLogo.style.opacity =
-    "0";
-
-
-/* =========================================================
-   START
-   ========================================================= */
-
-showOpeningScene();

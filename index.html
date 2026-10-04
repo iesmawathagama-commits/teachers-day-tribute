@@ -1,95 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#3d251e">
-  <title>Happy Teachers' Day</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#f4ead8"
+    >
+
+    <title>Happy Teachers' Day</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 </head>
 
 <body>
 
-  <main id="experience" aria-label="Interactive Teacher's Day tribute">
+    <main id="experience">
 
-    <!-- Main background -->
-    <div id="scene-bg" class="scene-bg"></div>
+        <!-- =====================================================
+             MAIN BACKGROUND
+             ===================================================== -->
 
-    <!-- Opening title -->
-    <div id="intro-title" class="scene-layer title-layer" aria-hidden="true">
-      <div id="title-text" class="title-text"></div>
-    </div>
+        <div
+            id="scene-bg"
+            class="scene-bg"
+            aria-hidden="true"
+        ></div>
 
-    <!-- Introductory message -->
-    <div id="intro-message" class="scene-layer intro-layer" aria-hidden="true">
-      <div id="intro-line" class="intro-line"></div>
-    </div>
 
-    <!-- Flower selection -->
-    <div id="flower-scene" class="scene-layer flower-layer" aria-hidden="true">
+        <!-- =====================================================
+             SCENE 1 — OPENING TITLE
+             ===================================================== -->
 
-      <div id="flower-grid" class="flower-grid" aria-label="Choose a flower">
+        <section
+            id="intro-title"
+            class="scene-layer title-layer"
+            aria-hidden="true"
+        >
 
-        <button class="flower-hit flower-1" data-flower="1" aria-label="Flower 1"></button>
-        <button class="flower-hit flower-2" data-flower="2" aria-label="Flower 2"></button>
-        <button class="flower-hit flower-3" data-flower="3" aria-label="Flower 3"></button>
-        <button class="flower-hit flower-4" data-flower="4" aria-label="Flower 4"></button>
-        <button class="flower-hit flower-5" data-flower="5" aria-label="Flower 5"></button>
+            <div
+                id="title-text"
+                class="title-text"
+            >
+                Happy Teachers' Day
+            </div>
 
-        <button class="flower-hit flower-6" data-flower="6" aria-label="Flower 6"></button>
-        <button class="flower-hit flower-7" data-flower="7" aria-label="Flower 7"></button>
-        <button class="flower-hit flower-8" data-flower="8" aria-label="Flower 8"></button>
-        <button class="flower-hit flower-9" data-flower="9" aria-label="Flower 9"></button>
-        <button class="flower-hit flower-10" data-flower="10" aria-label="Flower 10"></button>
+        </section>
 
-      </div>
-    </div>
 
-    <!-- Magical particle effect -->
-    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+        <!-- =====================================================
+             SCENE 2 — INTRODUCTORY MESSAGE
+             ===================================================== -->
 
-    <!-- Letter scene -->
-    <div id="letter-scene" class="scene-layer letter-layer" aria-hidden="true">
+        <section
+            id="intro-message"
+            class="scene-layer intro-layer"
+            aria-hidden="true"
+        >
 
-      <!-- IMPORTANT:
-           This box stays CENTERED on the paper.
-           Text inside it is LEFT ALIGNED.
-      -->
-      <div id="letter-message-box" class="letter-message-box">
-        <div id="letter-message" class="letter-message"></div>
-      </div>
+            <div
+                id="intro-line"
+                class="intro-line"
+            ></div>
 
-      <!-- Finish button -->
-      <button id="finish-button" class="finish-button" aria-label="Finish">
-        <img src="assets/finish-button.png" alt="Finish">
-      </button>
+        </section>
 
-    </div>
 
-    <!-- Final scene -->
-    <div id="final-scene" class="scene-layer final-layer" aria-hidden="true">
+        <!-- =====================================================
+             SCENE 3 — FLOWER SELECTION
+             ===================================================== -->
 
-      <img
-        id="final-logo"
-        class="final-logo"
-        src="assets/logo-3.png"
-        alt="Logo"
-      >
+        <section
+            id="flower-scene"
+            class="scene-layer flower-layer"
+            aria-hidden="true"
+        >
 
-    </div>
+            <div
+                id="flower-grid"
+                class="flower-grid"
+            >
 
-    <!-- Portrait warning -->
-    <div id="portrait-warning" class="portrait-warning">
+                <button
+                    type="button"
+                    class="flower-hit"
+                    data-flower="1"
+                    aria-label="Choose flower 1"
+                ></button>
 
-      <div class="portrait-warning-text">
-        Please turn your phone sideways to continue.
-      </div>
+                <button
+                    type="button"
+                    class="flower-hit"
+                    data-flower="2"
+                    aria-label="Choose flower 2"
+                ></button>
 
-    </div>
+                <button
+                    type="button"
+                    class="flower-hit"
+                    data-flower="3"
+                    aria-label="Choose flower 3"
+                ></button>
 
-  </main>
+                <button
+                    type="button"
+                    class="flower-hit"
+                    data-flower="4"
+                    aria-label="Choose flower 4"
+                ></button>
 
-  <script src="script.js"></script>
+                <button
+                    type="button"
+                    class="flower-hit"
+                    data-flower="5"
+                    aria-label="Choose flower 5"
+                ></button>
+
+                <button
+                    type="button"
+                    class="flower-hit"
+                    data-flower="6"
+                    aria-label="Choose flower 6"
+                ></button>
+
+                <button
+                    type="button"
+                    class="flower-hit"
+                    data-flower="7"
+                    aria-label="Choose flower 7"
+                ></button>
+
+                <button
+                    type="button"
+                    class="flower-hit"
+                    data-flower="8"
+                    aria-label="Choose flower 8"
+                ></button>
+
+                <button
+                    type="button"
+                    class="flower-hit"
+                    data-flower="9"
+                    aria-label="Choose flower 9"
+                ></button>
+
+                <button
+                    type="button"
+                    class="flower-hit"
+                    data-flower="10"
+                    aria-label="Choose flower 10"
+                ></button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PARTICLE EFFECT
+             ===================================================== -->
+
+        <canvas
+            id="particle-canvas"
+            aria-hidden="true"
+        ></canvas>
+
+
+        <!-- =====================================================
+             SCENE 4 — LETTER / ENVELOPE
+             ===================================================== -->
+
+        <section
+            id="letter-scene"
+            class="scene-layer letter-layer"
+            aria-hidden="true"
+        >
+
+            <div
+                id="letter-message-box"
+                class="letter-message-box"
+            >
+
+                <div
+                    id="letter-message"
+                    class="letter-message"
+                ></div>
+
+            </div>
+
+
+            <!-- FINISH BUTTON -->
+
+            <button
+                id="finish-button"
+                class="finish-button"
+                type="button"
+                aria-label="Finish"
+            >
+
+                <img
+                    src="assets/finish-button.png"
+                    alt="Finish"
+                    draggable="false"
+                >
+
+            </button>
+
+        </section>
+
+
+        <!-- =====================================================
+             SCENE 5 — FINAL REVEAL
+             ===================================================== -->
+
+        <section
+            id="final-scene"
+            class="scene-layer final-layer"
+            aria-hidden="true"
+        >
+
+            <img
+                id="final-logo"
+                class="final-logo"
+                src="assets/logo-3.png"
+                alt="Institute of English Studies"
+                draggable="false"
+            >
+
+        </section>
+
+
+        <!-- =====================================================
+             PORTRAIT WARNING
+             ===================================================== -->
+
+        <div
+            id="portrait-warning"
+            class="portrait-warning"
+            aria-hidden="true"
+        >
+
+            <div class="portrait-warning-text">
+                Please turn your phone sideways to continue.
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+         ========================================================= -->
+
+    <script src="script.js"></script>
 
 </body>
 </html>

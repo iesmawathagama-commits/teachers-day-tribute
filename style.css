@@ -1,63 +1,25 @@
-/* ============================================================
-   TEACHER'S DAY DIGITAL TRIBUTE
-
-   STYLE.CSS
-
-   ============================================================ */
-
-
 :root {
 
   --text-color: #3d251e;
 
-
-  /* BACKGROUNDS */
-
   --bg1: url("assets/bg1.png");
-
   --bg2: url("assets/bg2.png");
-
   --bg3: url("assets/bg3.png");
 
-
-  /* LETTER BACKGROUNDS */
-
   --letter-1: url("assets/letter-bg-1.png");
-
   --letter-2: url("assets/letter-bg-2.png");
-
   --letter-3: url("assets/letter-bg-3.png");
-
   --letter-4: url("assets/letter-bg-4.png");
-
   --letter-5: url("assets/letter-bg-5.png");
-
   --letter-6: url("assets/letter-bg-6.png");
-
   --letter-7: url("assets/letter-bg-7.png");
-
   --letter-8: url("assets/letter-bg-8.png");
-
   --letter-9: url("assets/letter-bg-9.png");
-
   --letter-10: url("assets/letter-bg-10.png");
-
-
-  /* FINAL BACKGROUND */
 
   --final-bg: url("assets/final-bg.png");
 
 }
-
-
-
-/* ============================================================
-
-   FONTS
-
-   ============================================================ */
-
-
 
 @font-face {
 
@@ -69,8 +31,6 @@
 
 }
 
-
-
 @font-face {
 
   font-family: "F2";
@@ -80,8 +40,6 @@
   font-display: swap;
 
 }
-
-
 
 @font-face {
 
@@ -93,16 +51,6 @@
 
 }
 
-
-
-/* ============================================================
-
-   BASIC RESET
-
-   ============================================================ */
-
-
-
 * {
 
   box-sizing: border-box;
@@ -111,25 +59,17 @@
 
 }
 
-
-
 html,
-
 body {
-
   width: 100%;
-
   height: 100%;
-
   margin: 0;
-
+  padding: 0;
   overflow: hidden;
-
-  background: #000;
-
+  background: #f4ead8;
+  border: 0;
+  outline: 0;
 }
-
-
 
 body {
 
@@ -139,149 +79,68 @@ body {
 
 }
 
-
-
 button {
 
   font: inherit;
 
 }
 
-
-
-/* ============================================================
-
-   MAIN EXPERIENCE
-
-   ============================================================ */
-
-
-
 #experience {
-
   position: fixed;
-
-  inset: 0;
-
-
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100vw;
-
   height: 100dvh;
-
-
+  margin: 0;
+  padding: 0;
   overflow: hidden;
-
-
-  background: #000;
-
-
+  background: #f4ead8;
+  border: 0;
+  outline: 0;
   isolation: isolate;
-
 }
-
-
-
-/* ============================================================
-
-   MAIN BACKGROUND
-
-   ============================================================ */
-
-
 
 .scene-bg {
-
   position: absolute;
-
-
   inset: 0;
-
-
+  width: 100%;
+  height: 100%;
   z-index: 0;
-
-
   background-repeat: no-repeat;
-
   background-position: center;
-
-  background-size: cover;
-
-
+  background-size: 100% 100%;
   opacity: 0;
-
-
   transition: opacity 1.8s ease-in-out;
-
-
   pointer-events: none;
-
 }
-
-
-
-/* ============================================================
-
-   SCENE LAYERS
-
-   ============================================================ */
-
-
 
 .scene-layer {
 
   position: absolute;
 
-
   inset: 0;
-
 
   z-index: 2;
 
-
   opacity: 0;
 
-
   visibility: hidden;
-
 
   pointer-events: none;
 
 }
 
-
-
-/*
-
-   IMPORTANT FIX
-
-
-   Previously the active scene still had pointer-events:none.
-
-
-   That prevented the transparent flower buttons from receiving
-
-   touches.
-
-
-   Active scenes MUST receive pointer events.
-
-*/
-
-
-
 .scene-layer.active {
 
   opacity: 1;
 
-
   visibility: visible;
-
 
   pointer-events: auto;
 
 }
-
-
 
 .title-layer,
 
@@ -299,46 +158,21 @@ button {
 
 }
 
-
-
-/* ============================================================
-
-   OPENING TITLE
-
-   ============================================================ */
-
-
-
 .title-layer {
 
   display: grid;
 
-
   place-items: center;
-
 
   padding: 5vw;
 
 }
 
-
-
 .title-text {
 
   color: var(--text-color);
 
-
   font-family: "F1", serif;
-
-
-  /*
-
-     CANVA REFERENCE SIZE:
-
-     60
-
-  */
-
 
   font-size: clamp(
 
@@ -350,30 +184,15 @@ button {
 
   );
 
-
   line-height: 1.08;
-
 
   text-align: center;
 
-
   white-space: nowrap;
-
 
   letter-spacing: 0;
 
-
   opacity: 0;
-
-
-  /*
-
-     Gentle fade-in.
-
-     NOT typewriter.
-
-  */
-
 
   transition:
 
@@ -381,57 +200,29 @@ button {
 
 }
 
-
-
 .title-text.visible {
 
   opacity: 1;
 
 }
 
-
-
-/* ============================================================
-
-   INTRODUCTORY MESSAGE
-
-   ============================================================ */
-
-
-
 .intro-layer {
 
   display: grid;
 
-
   place-items: center;
-
 
   padding: 5vw;
 
 }
 
-
-
 .intro-line {
 
   max-width: 90vw;
 
-
   color: var(--text-color);
 
-
   font-family: "F2", serif;
-
-
-  /*
-
-     Canva reference size:
-
-     47
-
-  */
-
 
   font-size: clamp(
 
@@ -443,15 +234,11 @@ button {
 
   );
 
-
   line-height: 1.18;
-
 
   text-align: center;
 
-
   opacity: 0;
-
 
   transition:
 
@@ -459,23 +246,11 @@ button {
 
 }
 
-
-
 .intro-line.visible {
 
   opacity: 1;
 
 }
-
-
-
-/* ============================================================
-
-   FLOWER SELECTION
-
-   ============================================================ */
-
-
 
 .flower-layer {
 
@@ -483,38 +258,21 @@ button {
 
 }
 
-
-
-/*
-
-   Five flowers across
-
-   Two rows
-
-*/
-
-
-
 .flower-grid {
 
   position: absolute;
 
-
   inset: 0;
 
-
   display: grid;
-
 
   grid-template-columns:
 
     repeat(5, 1fr);
 
-
   grid-template-rows:
 
     repeat(2, 1fr);
-
 
   padding:
 
@@ -524,744 +282,379 @@ button {
 
     10vh;
 
-
   gap:
 
     2vh
 
     1vw;
 
-
   z-index: 10;
 
 }
-
-
-
-/*
-
-   Transparent touch areas
-
-*/
-
-
 
 .flower-hit {
 
   appearance: none;
 
-
   border: 0;
-
 
   outline: 0;
 
-
   background: transparent;
-
 
   min-width: 0;
 
-
   min-height: 0;
-
 
   cursor: pointer;
 
-
   touch-action: manipulation;
 
-
   position: relative;
-
 
   padding: 0;
 
 }
-
-
-
-/*
-
-   Invisible enlarged touch area
-
-*/
-
-
 
 .flower-hit::after {
 
   content: "";
 
-
   position: absolute;
 
-
   inset: 5%;
-
 
   border-radius: 50%;
 
 }
 
-
-
-/* ============================================================
-
-   PARTICLE CANVAS
-
-   ============================================================ */
-
-
-
 #particle-canvas {
 
   position: absolute;
 
-
   inset: 0;
-
 
   width: 100%;
 
-
   height: 100%;
-
 
   z-index: 8;
 
-
   pointer-events: none;
 
 }
-
 
 
 /* ============================================================
-
    LETTER SCENE
-
    ============================================================ */
 
-
-
 .letter-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 
   background-repeat: no-repeat;
-
-
   background-position: center;
 
+  /* FULL MOBILE SCREEN — NO ZOOM / NO BLACK EDGES */
+  background-size: 100% 100%;
 
-  background-size: cover;
-
+  background-color: #f4ead8;
 }
 
 
-
-/*
-
-   IMPORTANT LETTER POSITIONING
-
-
-   The MESSAGE BOX itself is centered on the paper.
-
-
-   The text INSIDE the box is left aligned.
-
-
-   We are NOT moving the entire message box to the left.
-
-*/
-
-
+/* ============================================================
+   LETTER MESSAGE
+   ============================================================ */
 
 .letter-message-box {
-
   position: absolute;
 
-
   left: 50%;
+  top: 18%;
 
+  width: min(52vw, 30rem);
+  height: 64%;
 
-  top: 50%;
-
-
-  width:
-
-    min(
-
-      42vw,
-
-      24rem
-
-    );
-
-
-  transform:
-
-    translate(
-
-      -50%,
-
-      -50%
-
-    );
-
+  transform: translateX(-50%);
 
   color: var(--text-color);
 
-
   pointer-events: none;
 
+  overflow: hidden;
 }
-
-
-
-/*
-
-   Text inside the centered box
-
-*/
-
-
 
 .letter-message {
 
   width: 100%;
-
+  height: 100%;
 
   font-family: "F3", serif;
 
-
-  /*
-
-     Canva reference size:
-
-     25
-
-  */
-
-
   font-size: clamp(
-
     0.95rem,
-
     2.35vw,
-
     1.5625rem
-
   );
-
 
   line-height: 1.38;
 
-
   font-weight: 400;
-
-
-  /*
-
-     LEFT ALIGNED
-
-  */
-
 
   text-align: left;
 
-
   white-space: pre-line;
 
-
-  overflow-wrap: normal;
-
+  overflow-wrap: break-word;
 
   word-break: normal;
 
-
   hyphens: none;
 
+  overflow: hidden;
 }
-
-
-
-/*
-
-   Each line is deliberately generated
-
-   by JavaScript.
-
-
-   Browser wrapping does NOT determine
-
-   the visual composition.
-
-*/
-
-
-
-.letter-message .message-line {
-
-  display: block;
-
-
-  white-space: nowrap;
-
-}
-
-
-
-/*
-
-   Small separation after:
-
-
-   Dear Teacher,
-
-*/
-
-
-
-.letter-message .message-line:first-child {
-
-  margin-bottom: 0.75em;
-
-}
-
 
 
 /* ============================================================
-
    FINISH BUTTON
-
    ============================================================ */
-
-
 
 .finish-button {
 
   position: absolute;
 
-
   z-index: 20;
 
-
-  /*
-
-     BOTTOM-RIGHT
-
-
-     Safe-area aware for mobile devices.
-
-  */
-
-
   right:
-
     max(
-
       1rem,
-
       env(safe-area-inset-right)
-
     );
-
 
   bottom:
-
     max(
-
       1rem,
-
       env(safe-area-inset-bottom)
-
     );
-
 
   width:
-
     clamp(
-
       3rem,
-
       7vw,
-
       5rem
-
     );
-
-
-  /*
-
-     Comfortable touch target.
-
-  */
-
 
   min-width: 48px;
 
-
   min-height: 48px;
-
 
   padding: 0;
 
-
   border: 0;
-
 
   background: transparent;
 
-
   cursor: pointer;
 
-
   touch-action: manipulation;
-
 
   opacity: 1;
 
 }
 
-
-
 .finish-button img {
 
   display: block;
 
-
   width: 100%;
-
 
   height: auto;
 
-
   pointer-events: none;
-
 
   user-select: none;
 
 }
 
-
-
-/*
-
-   Tiny press/bounce animation
-
-*/
-
-
-
 .finish-button.pressed {
 
   animation:
-
     finishTinyBounce
-
     220ms
-
     ease-out;
 
 }
 
-
-
 @keyframes finishTinyBounce {
-
-
 
   0% {
 
     transform:
-
       translateY(0)
-
       scale(1);
 
   }
-
-
 
   35% {
 
     transform:
-
       translateY(1px)
-
       scale(0.97);
 
   }
 
-
-
   65% {
 
     transform:
-
       translateY(-1px)
-
       scale(1.015);
 
   }
 
-
-
   100% {
 
     transform:
-
       translateY(0)
-
       scale(1);
 
   }
 
-
-
 }
-
-
-
-/* ============================================================
-
-   FINAL SCENE
-
-   ============================================================ */
-
 
 
 .final-layer {
 
   display: grid;
 
-
   place-items: center;
 
-
   background-image:
-
     var(--final-bg);
-
 
   background-position: center;
 
-
   background-size: cover;
-
 
   background-repeat: no-repeat;
 
 }
 
-
-
 .final-logo {
 
   width:
-
     min(
-
       38vw,
-
       20rem
-
     );
-
 
   max-width: 70vw;
 
-
   height: auto;
-
 
   opacity: 0;
 
-
   transform:
-
     scale(0.94);
 
-
   will-change:
-
     opacity,
-
     transform;
 
 }
 
-
-
-/*
-
-   Slow cinematic final logo
-
-*/
-
-
-
 .final-logo.reveal {
 
   animation:
-
     finalLogoReveal
-
     5s
-
     cubic-bezier(
-
       0.2,
-
       0.7,
-
       0.2,
-
       1
-
     )
-
     forwards;
 
 }
 
-
-
 @keyframes finalLogoReveal {
-
-
 
   from {
 
     opacity: 0;
 
-
-
     transform:
-
       scale(0.94);
 
   }
-
-
 
   to {
 
     opacity: 1;
 
-
-
     transform:
-
       scale(1);
 
   }
 
-
-
 }
-
-
-
-/* ============================================================
-
-   PORTRAIT WARNING
-
-   ============================================================ */
-
 
 
 .portrait-warning {
 
   position: fixed;
 
-
   inset: 0;
-
 
   z-index: 100;
 
-
   display: none;
-
 
   place-items: center;
 
-
   padding: 2rem;
-
 
   background: #000;
 
-
   color: var(--text-color);
-
 
   text-align: center;
 
 }
 
-
-
 .portrait-warning-text {
 
   max-width: 24rem;
 
-
   padding: 1.5rem;
 
-
   background:
-
     rgba(
-
       255,
-
       255,
-
       255,
-
       0.96
-
     );
-
 
   border-radius: 1rem;
 
-
   font-family: "F2", serif;
 
-
   font-size:
-
     clamp(
-
       1.2rem,
-
       5vw,
-
       2rem
-
     );
-
 
   line-height: 1.3;
 
 }
 
-
-
-/* ============================================================
-
-   PORTRAIT MODE
-
-   ============================================================ */
-
-
-
 @media (orientation: portrait) {
-
-
 
   .portrait-warning {
 
@@ -1269,174 +662,84 @@ button {
 
   }
 
-
-
   #experience > *:not(#portrait-warning) {
 
     visibility: hidden !important;
 
   }
 
-
-
 }
 
 
-
-/* ============================================================
-
-   SMALL LANDSCAPE PHONES
-
-   ============================================================ */
-
-
-
 @media (
-
   max-height: 430px
-
 ) and (
-
   orientation: landscape
-
 ) {
-
-
 
   .letter-message-box {
 
     width:
-
       min(
-
-        42vw,
-
+        52vw,
         24rem
-
       );
+
+    height: 64%;
 
   }
 
-
-
   .letter-message {
 
-
-
     font-size:
-
       clamp(
-
         0.78rem,
-
         2.35vw,
-
         1.25rem
-
       );
-
-
 
     line-height: 1.3;
 
   }
 
-
-
-  .letter-message
-
-  .message-line:first-child {
-
-
-
-    margin-bottom:
-
-      0.55em;
-
-  }
-
-
-
   .finish-button {
 
-
-
     right:
-
       max(
-
         0.65rem,
-
         env(safe-area-inset-right)
-
       );
-
-
 
     bottom:
-
       max(
-
         0.65rem,
-
         env(safe-area-inset-bottom)
-
       );
 
-
-
     width:
-
       clamp(
-
         2.8rem,
-
         7vw,
-
         4rem
-
       );
 
   }
-
-
 
 }
 
 
-
-/* ============================================================
-
-   VERY WIDE LANDSCAPE SCREENS
-
-   ============================================================ */
-
-
-
 @media (
-
   min-aspect-ratio: 2.3 / 1
-
 ) {
-
-
 
   .letter-message-box {
 
-
-
     width:
-
       min(
-
-        42vw,
-
-        24rem
-
+        45vw,
+        31rem
       );
 
   }
-
-
 
 }
