@@ -2,13 +2,7 @@
    HAPPY TEACHERS' DAY — INTERACTIVE TRIBUTE
    ========================================================= */
 
-
-/* =========================================================
-   DOM ELEMENTS
-   ========================================================= */
-
 const experience = document.getElementById("experience");
-
 const sceneBg = document.getElementById("scene-bg");
 
 const introTitle = document.getElementById("intro-title");
@@ -24,14 +18,22 @@ const flowerButtons = document.querySelectorAll(".flower-hit");
 const particleCanvas = document.getElementById("particle-canvas");
 
 const letterScene = document.getElementById("letter-scene");
-const letterMessageBox = document.getElementById("letter-message-box");
-const letterMessage = document.getElementById("letter-message");
-const finishButton = document.getElementById("finish-button");
+const letterMessageBox =
+    document.getElementById("letter-message-box");
+const letterMessage =
+    document.getElementById("letter-message");
 
-const finalScene = document.getElementById("final-scene");
-const finalLogo = document.getElementById("final-logo");
+const finishButton =
+    document.getElementById("finish-button");
 
-const portraitWarning = document.getElementById("portrait-warning");
+const finalScene =
+    document.getElementById("final-scene");
+
+const finalLogo =
+    document.getElementById("final-logo");
+
+const portraitWarning =
+    document.getElementById("portrait-warning");
 
 
 /* =========================================================
@@ -81,18 +83,8 @@ const teacherMessages = [
    ========================================================= */
 
 let currentBackground = BG1;
-
 let flowerLocked = false;
-
 let experienceFinished = false;
-
-/*
- * Each visitor gets their own message deck.
- * The messages are shuffled and used one by one.
- * This prevents the same visitor from repeatedly
- * receiving the same message.
- */
-let messageDeck = [];
 
 
 /* =========================================================
@@ -108,7 +100,11 @@ function wait(ms) {
    BACKGROUND TRANSITION
    ========================================================= */
 
-function crossfadeBackground(newBackground, duration = 1400) {
+function crossfadeBackground(
+    newBackground,
+    duration = 1400,
+    backgroundSize = "cover"
+) {
 
     return new Promise(resolve => {
 
@@ -117,7 +113,8 @@ function crossfadeBackground(newBackground, duration = 1400) {
             return;
         }
 
-        const nextBg = document.createElement("div");
+        const nextBg =
+            document.createElement("div");
 
         nextBg.style.position = "absolute";
         nextBg.style.inset = "0";
@@ -127,9 +124,14 @@ function crossfadeBackground(newBackground, duration = 1400) {
         nextBg.style.backgroundImage =
             `url("${newBackground}")`;
 
-        nextBg.style.backgroundSize = "cover";
-        nextBg.style.backgroundPosition = "center";
-        nextBg.style.backgroundRepeat = "no-repeat";
+        nextBg.style.backgroundSize =
+            backgroundSize;
+
+        nextBg.style.backgroundPosition =
+            "center";
+
+        nextBg.style.backgroundRepeat =
+            "no-repeat";
 
         nextBg.style.opacity = "0";
 
@@ -153,10 +155,14 @@ function crossfadeBackground(newBackground, duration = 1400) {
             sceneBg.style.backgroundImage =
                 `url("${newBackground}")`;
 
+            sceneBg.style.backgroundSize =
+                backgroundSize;
+
             sceneBg.style.opacity = "1";
             sceneBg.style.zIndex = "0";
 
-            currentBackground = newBackground;
+            currentBackground =
+                newBackground;
 
             nextBg.remove();
 
@@ -172,14 +178,24 @@ function crossfadeBackground(newBackground, duration = 1400) {
    ========================================================= */
 
 function showScene(scene) {
+
     scene.classList.add("active");
-    scene.setAttribute("aria-hidden", "false");
+
+    scene.setAttribute(
+        "aria-hidden",
+        "false"
+    );
 }
 
 
 function hideScene(scene) {
+
     scene.classList.remove("active");
-    scene.setAttribute("aria-hidden", "true");
+
+    scene.setAttribute(
+        "aria-hidden",
+        "true"
+    );
 }
 
 
@@ -192,30 +208,70 @@ async function showOpeningScene() {
     sceneBg.style.backgroundImage =
         `url("${BG1}")`;
 
+    sceneBg.style.backgroundSize =
+        "cover";
+
+    sceneBg.style.backgroundPosition =
+        "center";
+
+    sceneBg.style.backgroundRepeat =
+        "no-repeat";
+
     sceneBg.style.opacity = "1";
     sceneBg.style.zIndex = "0";
 
     currentBackground = BG1;
 
+
+    /* IMPORTANT:
+       This is your original title scene. */
+
     showScene(introTitle);
 
-    titleText.textContent = "Happy Teachers' Day";
 
-    titleText.classList.remove("visible");
+    /* Exact title */
+
+    titleText.textContent =
+        "Happy Teachers' Day";
+
+
+    titleText.classList.remove(
+        "visible"
+    );
+
 
     await wait(100);
 
-    titleText.classList.add("visible");
+
+    /* Fade title IN */
+
+    titleText.classList.add(
+        "visible"
+    );
+
 
     await wait(4000);
 
-    titleText.classList.remove("visible");
 
-    await crossfadeBackground(BG2, 1400);
+    /* Fade title OUT */
+
+    titleText.classList.remove(
+        "visible"
+    );
+
+
+    await crossfadeBackground(
+        BG2,
+        1400,
+        "cover"
+    );
+
 
     hideScene(introTitle);
 
+
     await wait(1000);
+
 
     startIntroMessage();
 }
@@ -231,13 +287,14 @@ async function displayIntroPart(lines) {
 
     lines.forEach(line => {
 
-        const div = document.createElement("div");
+        const div =
+            document.createElement("div");
 
         div.textContent = line;
 
         introLine.appendChild(div);
-
     });
+
 
     showScene(introMessage);
 
@@ -262,11 +319,13 @@ async function startIntroMessage() {
         "has been created especially for you,"
     ]);
 
+
     await displayIntroPart([
         "to celebrate you",
         "and the wonderful work",
         "you do every day."
     ]);
+
 
     await displayIntroPart([
         "On this special day,",
@@ -274,11 +333,18 @@ async function startIntroMessage() {
         "for a moment and say:"
     ]);
 
+
     await displayIntroPart([
         "Thank you, Teacher."
     ]);
 
-    await crossfadeBackground(BG3, 1400);
+
+    await crossfadeBackground(
+        BG3,
+        1400,
+        "100% 100%"
+    );
+
 
     showFlowerScene();
 }
@@ -298,8 +364,8 @@ function showFlowerScene() {
 
         button.disabled = false;
 
-        button.style.pointerEvents = "auto";
-
+        button.style.pointerEvents =
+            "auto";
     });
 }
 
@@ -308,39 +374,55 @@ function showFlowerScene() {
    FLOWER SELECTION
    ========================================================= */
 
-function selectFlower(flowerNumber, clickX, clickY) {
+function selectFlower(
+    flowerNumber,
+    clickX,
+    clickY
+) {
 
-    if (flowerLocked || experienceFinished) {
+    if (
+        flowerLocked ||
+        experienceFinished
+    ) {
         return;
     }
 
+
     flowerLocked = true;
+
 
     flowerButtons.forEach(button => {
 
         button.disabled = true;
 
-        button.style.pointerEvents = "none";
-
+        button.style.pointerEvents =
+            "none";
     });
 
-    /*
-     * Sparks originate exactly from the clicked flower.
-     */
 
-    createParticles(clickX, clickY);
+    createParticles(
+        clickX,
+        clickY
+    );
+
 
     setTimeout(async () => {
 
         hideScene(flowerScene);
 
+
         const selectedBackground =
-            LETTER_BACKGROUNDS[flowerNumber - 1];
+            LETTER_BACKGROUNDS[
+                flowerNumber - 1
+            ];
+
 
         await crossfadeBackground(
             selectedBackground,
-            1400
+            1400,
+            "100% 100%"
         );
+
 
         showLetterScene();
 
@@ -354,21 +436,25 @@ function selectFlower(flowerNumber, clickX, clickY) {
 
 flowerButtons.forEach(button => {
 
-    button.addEventListener("pointerdown", event => {
+    button.addEventListener(
+        "pointerdown",
+        event => {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        const flowerNumber =
-            Number(button.dataset.flower);
+            const flowerNumber =
+                Number(
+                    button.dataset.flower
+                );
 
-        selectFlower(
-            flowerNumber,
-            event.clientX,
-            event.clientY
-        );
 
-    });
-
+            selectFlower(
+                flowerNumber,
+                event.clientX,
+                event.clientY
+            );
+        }
+    );
 });
 
 
@@ -376,115 +462,174 @@ flowerButtons.forEach(button => {
    FLOWER GRID FALLBACK
    ========================================================= */
 
-flowerGrid.addEventListener("pointerdown", event => {
+flowerGrid.addEventListener(
+    "pointerdown",
+    event => {
 
-    if (flowerLocked || experienceFinished) {
-        return;
-    }
+        if (
+            flowerLocked ||
+            experienceFinished
+        ) {
+            return;
+        }
 
-    if (event.target.closest(".flower-hit")) {
-        return;
-    }
 
-    const rect = flowerGrid.getBoundingClientRect();
-
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    const column =
-        Math.max(
-            0,
-            Math.min(
-                4,
-                Math.floor((x / rect.width) * 5)
+        if (
+            event.target.closest(
+                ".flower-hit"
             )
+        ) {
+            return;
+        }
+
+
+        const rect =
+            flowerGrid.getBoundingClientRect();
+
+
+        const x =
+            event.clientX -
+            rect.left;
+
+
+        const y =
+            event.clientY -
+            rect.top;
+
+
+        const column =
+            Math.max(
+                0,
+                Math.min(
+                    4,
+                    Math.floor(
+                        (x / rect.width) * 5
+                    )
+                )
+            );
+
+
+        const row =
+            Math.max(
+                0,
+                Math.min(
+                    1,
+                    Math.floor(
+                        (y / rect.height) * 2
+                    )
+                )
+            );
+
+
+        const flowerNumber =
+            row * 5 +
+            column +
+            1;
+
+
+        selectFlower(
+            flowerNumber,
+            event.clientX,
+            event.clientY
         );
-
-    const row =
-        Math.max(
-            0,
-            Math.min(
-                1,
-                Math.floor((y / rect.height) * 2)
-            )
-        );
-
-    const flowerNumber =
-        row * 5 + column + 1;
-
-    selectFlower(
-        flowerNumber,
-        event.clientX,
-        event.clientY
-    );
-
-});
+    }
+);
 
 
 /* =========================================================
    MAGICAL WHITE PARTICLES
    ========================================================= */
 
-function createParticles(originX, originY) {
+function createParticles(
+    originX,
+    originY
+) {
 
-    const canvas = particleCanvas;
+    const canvas =
+        particleCanvas;
 
-    const ctx = canvas.getContext("2d");
+    const ctx =
+        canvas.getContext("2d");
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+
+    canvas.width =
+        window.innerWidth;
+
+    canvas.height =
+        window.innerHeight;
+
 
     const particles = [];
 
-    /*
-     * Fewer particles so the effect feels delicate,
-     * not explosive.
-     */
-
     const count = 48;
 
-    for (let i = 0; i < count; i++) {
+
+    for (
+        let i = 0;
+        i < count;
+        i++
+    ) {
 
         const angle =
-            Math.random() * Math.PI * 2;
+            Math.random() *
+            Math.PI *
+            2;
 
-        /*
-         * Very gentle outward movement.
-         */
 
         const speed =
-            Math.random() * 1.8 + 0.35;
+            Math.random() *
+            1.8 +
+            0.35;
+
 
         particles.push({
 
-            x: originX + (Math.random() - 0.5) * 10,
+            x:
+                originX +
+                (Math.random() - 0.5) *
+                10,
 
-            y: originY + (Math.random() - 0.5) * 10,
+            y:
+                originY +
+                (Math.random() - 0.5) *
+                10,
 
-            vx: Math.cos(angle) * speed,
+            vx:
+                Math.cos(angle) *
+                speed,
 
-            vy: Math.sin(angle) * speed,
+            vy:
+                Math.sin(angle) *
+                speed,
 
             size:
-                Math.random() * 1.8 + 0.7,
+                Math.random() *
+                1.8 +
+                0.7,
 
             life: 1,
 
             decay:
-                Math.random() * 0.012 + 0.008,
+                Math.random() *
+                0.012 +
+                0.008,
 
             drift:
-                (Math.random() - 0.5) * 0.018
-
+                (Math.random() - 0.5) *
+                0.018
         });
-
     }
 
-    const start = performance.now();
+
+    const start =
+        performance.now();
+
 
     function animate(now) {
 
-        const elapsed = now - start;
+        const elapsed =
+            now - start;
+
 
         ctx.clearRect(
             0,
@@ -493,91 +638,117 @@ function createParticles(originX, originY) {
             canvas.height
         );
 
-        particles.forEach(particle => {
 
-            particle.x += particle.vx;
-            particle.y += particle.vy;
+        particles.forEach(
+            particle => {
 
-            /*
-             * Very subtle drifting movement.
-             */
+                particle.x +=
+                    particle.vx;
 
-            particle.vx += particle.drift;
-            particle.vy -= 0.004;
+                particle.y +=
+                    particle.vy;
 
-            particle.life -= particle.decay;
 
-            if (particle.life <= 0) {
-                return;
-            }
+                particle.vx +=
+                    particle.drift;
 
-            /*
-             * Soft white glow.
-             */
+                particle.vy -=
+                    0.004;
 
-            const glow =
-                ctx.createRadialGradient(
-                    particle.x,
-                    particle.y,
+
+                particle.life -=
+                    particle.decay;
+
+
+                if (
+                    particle.life <= 0
+                ) {
+                    return;
+                }
+
+
+                const glow =
+                    ctx.createRadialGradient(
+                        particle.x,
+                        particle.y,
+                        0,
+                        particle.x,
+                        particle.y,
+                        particle.size * 4
+                    );
+
+
+                glow.addColorStop(
                     0,
-                    particle.x,
-                    particle.y,
-                    particle.size * 4
+                    `rgba(255,255,255,${
+                        particle.life * 0.95
+                    })`
                 );
 
-            glow.addColorStop(
-                0,
-                `rgba(255,255,255,${particle.life * 0.95})`
-            );
 
-            glow.addColorStop(
-                0.35,
-                `rgba(255,255,255,${particle.life * 0.45})`
-            );
+                glow.addColorStop(
+                    0.35,
+                    `rgba(255,255,255,${
+                        particle.life * 0.45
+                    })`
+                );
 
-            glow.addColorStop(
-                1,
-                "rgba(255,255,255,0)"
-            );
 
-            ctx.fillStyle = glow;
+                glow.addColorStop(
+                    1,
+                    "rgba(255,255,255,0)"
+                );
 
-            ctx.beginPath();
 
-            ctx.arc(
-                particle.x,
-                particle.y,
-                particle.size * 4,
-                0,
-                Math.PI * 2
-            );
+                ctx.fillStyle =
+                    glow;
 
-            ctx.fill();
 
-            /*
-             * Tiny bright center.
-             */
+                ctx.beginPath();
 
-            ctx.fillStyle =
-                `rgba(255,255,255,${particle.life * 0.9})`;
 
-            ctx.beginPath();
+                ctx.arc(
+                    particle.x,
+                    particle.y,
+                    particle.size * 4,
+                    0,
+                    Math.PI * 2
+                );
 
-            ctx.arc(
-                particle.x,
-                particle.y,
-                particle.size * 0.55,
-                0,
-                Math.PI * 2
-            );
 
-            ctx.fill();
+                ctx.fill();
 
-        });
+
+                /* Tiny bright center */
+
+                ctx.fillStyle =
+                    `rgba(255,255,255,${
+                        particle.life * 0.9
+                    })`;
+
+
+                ctx.beginPath();
+
+
+                ctx.arc(
+                    particle.x,
+                    particle.y,
+                    particle.size * 0.55,
+                    0,
+                    Math.PI * 2
+                );
+
+
+                ctx.fill();
+            }
+        );
+
 
         if (elapsed < 2000) {
 
-            requestAnimationFrame(animate);
+            requestAnimationFrame(
+                animate
+            );
 
         } else {
 
@@ -587,11 +758,13 @@ function createParticles(originX, originY) {
                 canvas.width,
                 canvas.height
             );
-
         }
     }
 
-    requestAnimationFrame(animate);
+
+    requestAnimationFrame(
+        animate
+    );
 }
 
 
@@ -601,11 +774,15 @@ function createParticles(originX, originY) {
 
 function showLetterScene() {
 
-    letterMessageBox.style.top = "38%";
+    letterMessageBox.style.top =
+        "38%";
 
-    letterMessageBox.style.left = "54%";
+    letterMessageBox.style.left =
+        "54%";
+
 
     showScene(letterScene);
+
 
     displayTeacherMessage();
 }
@@ -615,70 +792,79 @@ function showLetterScene() {
    MESSAGE FORMATTER
    ========================================================= */
 
+/*
+   IMPORTANT CHANGE:
+
+   We no longer create a separate DOM element
+   for every line.
+
+   The entire letter is kept as ONE text node.
+
+   This removes the stutter/reflow that happened
+   whenever a new line started.
+*/
+
 function formatTeacherMessage(message) {
 
-    letterMessage.innerHTML = "";
-
     let remaining =
-        message.replace(/^Dear Teacher,\s*/i, "").trim();
+        message
+            .replace(
+                /^Dear Teacher,\s*/i,
+                ""
+            )
+            .trim();
 
-    const words = remaining.split(/\s+/);
+
+    const words =
+        remaining.split(/\s+/);
+
 
     const lines = [];
 
     let currentLine = [];
 
+
     words.forEach(word => {
 
         currentLine.push(word);
 
-        if (currentLine.length >= 4) {
 
-            lines.push(currentLine.join(" "));
+        if (
+            currentLine.length >= 4
+        ) {
+
+            lines.push(
+                currentLine.join(" ")
+            );
 
             currentLine = [];
-
         }
-
     });
 
-    if (currentLine.length > 0) {
 
-        lines.push(currentLine.join(" "));
+    if (
+        currentLine.length > 0
+    ) {
 
+        lines.push(
+            currentLine.join(" ")
+        );
     }
 
-    const dearLine = document.createElement("div");
 
-    dearLine.className = "message-line";
+    /*
+       One continuous text string.
 
-    dearLine.textContent = "Dear Teacher,";
+       Newlines are real line breaks,
+       not separate HTML elements.
+    */
 
-    letterMessage.appendChild(dearLine);
-
-    lines.forEach(line => {
-
-        const lineElement =
-            document.createElement("div");
-
-        lineElement.className = "message-line";
-
-        lineElement.textContent = line;
-
-        letterMessage.appendChild(lineElement);
-
-    });
-
-    const closingLine =
-        document.createElement("div");
-
-    closingLine.className =
-        "message-line message-closing";
-
-    closingLine.textContent =
-        "Happy Teachers' Day";
-
-    letterMessage.appendChild(closingLine);
+    return (
+        "Dear Teacher,\n\n" +
+        lines.join("\n") +
+        "\n\n" +
+        "Happy Teachers' Day"
+    );
 }
 
 
@@ -688,125 +874,82 @@ function formatTeacherMessage(message) {
 
 async function displayTeacherMessage() {
 
-    /*
-     * If all 10 messages have already been used,
-     * create a completely new shuffled deck.
-     */
-
-    if (messageDeck.length === 0) {
-
-        messageDeck = Array.from(
-            { length: teacherMessages.length },
-            (_, index) => index
+    const randomIndex =
+        Math.floor(
+            Math.random() *
+            teacherMessages.length
         );
 
-        /*
-         * Fisher-Yates shuffle.
-         * This gives every message a random position
-         * in this visitor's personal deck.
-         */
-
-        for (
-            let i = messageDeck.length - 1;
-            i > 0;
-            i--
-        ) {
-
-            const j =
-                Math.floor(
-                    Math.random() * (i + 1)
-                );
-
-            const temp = messageDeck[i];
-
-            messageDeck[i] = messageDeck[j];
-
-            messageDeck[j] = temp;
-        }
-    }
-
-    /*
-     * Take one message from the shuffled deck.
-     * It cannot appear again until the deck is empty.
-     */
-
-    const randomIndex = messageDeck.pop();
 
     const selectedMessage =
         teacherMessages[randomIndex];
 
-    formatTeacherMessage(selectedMessage);
 
-    letterMessage.style.opacity = "1";
-
-    const lines =
-        Array.from(
-            letterMessage.querySelectorAll(".message-line")
+    const formattedMessage =
+        formatTeacherMessage(
+            selectedMessage
         );
 
-    lines.forEach(line => {
 
-        line.style.opacity = "0";
-
-    });
-
-    for (const line of lines) {
-
-        await typeLine(line);
-
-        await wait(180);
-
-    }
+    await typeLetterMessage(
+        formattedMessage
+    );
 }
 
 
 /* =========================================================
-   SLOWER LINE TYPE EFFECT
+   SMOOTH CONTINUOUS LETTER TYPE EFFECT
    ========================================================= */
 
-function typeLine(element) {
+async function typeLetterMessage(
+    text
+) {
 
-    return new Promise(resolve => {
+    /*
+       Clear the message ONCE.
 
-        const text = element.textContent;
+       After that, only the textContent
+       of the SAME element changes.
 
-        element.textContent = "";
+       This prevents the line-start stutter.
+    */
 
-        element.style.opacity = "1";
+    letterMessage.textContent = "";
 
+    letterMessage.style.opacity =
+        "1";
+
+
+    let visibleText = "";
+
+
+    const speed = 75;
+
+
+    for (
         let index = 0;
+        index < text.length;
+        index++
+    ) {
+
+        visibleText +=
+            text.charAt(index);
+
+
+        letterMessage.textContent =
+            visibleText;
+
 
         /*
-         * Slower, more elegant typing.
-         */
+           Spaces and line breaks use the
+           same timing as every other character.
 
-        const speed = 75;
+           There is no special pause when
+           a new line begins.
+        */
 
-        function typeCharacter() {
-
-            if (index < text.length) {
-
-                element.textContent +=
-                    text.charAt(index);
-
-                index++;
-
-                setTimeout(
-                    typeCharacter,
-                    speed
-                );
-
-            } else {
-
-                resolve();
-
-            }
-
-        }
-
-        typeCharacter();
-
-    });
+        await wait(speed);
+    }
 }
 
 
@@ -826,15 +969,37 @@ async function finishExperience() {
         return;
     }
 
+
     experienceFinished = true;
+
 
     finishButton.disabled = true;
 
-    finishButton.style.pointerEvents = "none";
+    finishButton.style.pointerEvents =
+        "none";
 
-    const nextBg = document.createElement("div");
 
-    nextBg.style.position = "absolute";
+    /*
+       Button bounce
+    */
+
+    finishButton.classList.remove(
+        "pressed"
+    );
+
+    void finishButton.offsetWidth;
+
+    finishButton.classList.add(
+        "pressed"
+    );
+
+
+    const nextBg =
+        document.createElement("div");
+
+
+    nextBg.style.position =
+        "absolute";
 
     nextBg.style.inset = "0";
 
@@ -842,86 +1007,133 @@ async function finishExperience() {
 
     nextBg.style.height = "100%";
 
+
     nextBg.style.backgroundImage =
         `url("${FINAL_BG}")`;
 
-    nextBg.style.backgroundSize = "cover";
 
-    nextBg.style.backgroundPosition = "center";
+    nextBg.style.backgroundSize =
+        "cover";
 
-    nextBg.style.backgroundRepeat = "no-repeat";
+    nextBg.style.backgroundPosition =
+        "center";
+
+    nextBg.style.backgroundRepeat =
+        "no-repeat";
+
 
     nextBg.style.opacity = "0";
+
 
     nextBg.style.transition =
         "opacity 1400ms ease-in-out";
 
+
     nextBg.style.zIndex = "1";
 
-    experience.appendChild(nextBg);
 
-    letterScene.style.zIndex = "10";
+    experience.appendChild(
+        nextBg
+    );
+
+
+    letterScene.style.zIndex =
+        "10";
+
 
     requestAnimationFrame(() => {
 
-        nextBg.style.opacity = "1";
+        nextBg.style.opacity =
+            "1";
+
 
         letterScene.style.transition =
             "opacity 1400ms ease-in-out";
 
-        letterScene.style.opacity = "0";
 
+        letterScene.style.opacity =
+            "0";
     });
+
 
     await wait(1450);
 
+
     sceneBg.style.backgroundImage =
         `url("${FINAL_BG}")`;
+
+
+    sceneBg.style.backgroundSize =
+        "cover";
 
     sceneBg.style.opacity = "1";
 
     sceneBg.style.zIndex = "0";
 
-    currentBackground = FINAL_BG;
+
+    currentBackground =
+        FINAL_BG;
+
 
     nextBg.remove();
 
+
     hideScene(letterScene);
 
-    letterScene.style.transition = "";
 
-    letterScene.style.opacity = "";
+    letterScene.style.transition =
+        "";
+
+    letterScene.style.opacity =
+        "";
+
 
     showScene(finalScene);
 
-    finalScene.style.zIndex = "10";
 
-    finalLogo.style.opacity = "0";
+    finalScene.style.zIndex =
+        "10";
 
-    finalLogo.style.transform = "scale(0.96)";
+
+    finalLogo.style.opacity =
+        "0";
+
+    finalLogo.style.transform =
+        "scale(0.96)";
+
 
     finalLogo.style.transition =
         "opacity 2200ms ease, transform 2200ms ease";
 
+
     await wait(150);
+
 
     requestAnimationFrame(() => {
 
-        finalLogo.style.opacity = "1";
+        finalLogo.style.opacity =
+            "1";
 
-        finalLogo.style.transform = "scale(1)";
-
+        finalLogo.style.transform =
+            "scale(1)";
     });
+
 
     await wait(2400);
 
-    finalLogo.style.transition = "none";
 
-    finalLogo.style.opacity = "1";
+    finalLogo.style.transition =
+        "none";
 
-    finalLogo.style.transform = "scale(1)";
+    finalLogo.style.opacity =
+        "1";
 
-    document.body.style.pointerEvents = "none";
+    finalLogo.style.transform =
+        "scale(1)";
+
+
+    document.body.style.pointerEvents =
+        "none";
 }
 
 
@@ -932,16 +1144,19 @@ async function finishExperience() {
 function updateOrientation() {
 
     const portrait =
-        window.innerHeight > window.innerWidth;
+        window.innerHeight >
+        window.innerWidth;
+
 
     if (portrait) {
 
-        portraitWarning.style.display = "flex";
+        portraitWarning.style.display =
+            "flex";
 
     } else {
 
-        portraitWarning.style.display = "none";
-
+        portraitWarning.style.display =
+            "none";
     }
 }
 
@@ -968,27 +1183,58 @@ updateOrientation();
 sceneBg.style.backgroundImage =
     `url("${BG1}")`;
 
-sceneBg.style.opacity = "1";
+sceneBg.style.backgroundSize =
+    "cover";
 
-sceneBg.style.zIndex = "0";
+sceneBg.style.backgroundPosition =
+    "center";
 
-currentBackground = BG1;
+sceneBg.style.backgroundRepeat =
+    "no-repeat";
 
-introTitle.classList.remove("active");
+sceneBg.style.opacity =
+    "1";
 
-introMessage.classList.remove("active");
+sceneBg.style.zIndex =
+    "0";
 
-flowerScene.classList.remove("active");
 
-letterScene.classList.remove("active");
+currentBackground =
+    BG1;
 
-finalScene.classList.remove("active");
 
-titleText.classList.remove("visible");
+introTitle.classList.remove(
+    "active"
+);
 
-introLine.style.opacity = "0";
+introMessage.classList.remove(
+    "active"
+);
 
-finalLogo.style.opacity = "0";
+flowerScene.classList.remove(
+    "active"
+);
+
+letterScene.classList.remove(
+    "active"
+);
+
+finalScene.classList.remove(
+    "active"
+);
+
+
+titleText.classList.remove(
+    "visible"
+);
+
+
+introLine.style.opacity =
+    "0";
+
+
+finalLogo.style.opacity =
+    "0";
 
 
 /* =========================================================

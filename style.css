@@ -141,12 +141,6 @@ button {
 
 
 /*
-   IMPORTANT FIX
-
-   Previously the active scene still had pointer-events:none.
-   That prevented the transparent flower buttons from receiving
-   touches.
-
    Active scenes MUST receive pointer events.
 */
 
@@ -181,17 +175,16 @@ button {
   padding: 5vw;
 }
 
+
 .title-text {
   color: var(--text-color);
 
   font-family: "F1", serif;
 
   /*
-     CANVA REFERENCE SIZE:
-     60
+     EXACT REQUESTED TITLE SIZE
   */
-
-  font-size: 6rem;
+  font-size: 3rem;
 
   line-height: 1.08;
 
@@ -207,10 +200,10 @@ button {
      Gentle fade-in.
      NOT typewriter.
   */
-
   transition:
     opacity 2.2s ease-in-out;
 }
+
 
 .title-text.visible {
   opacity: 1;
@@ -229,6 +222,7 @@ button {
   padding: 5vw;
 }
 
+
 .intro-line {
   max-width: 90vw;
 
@@ -240,7 +234,6 @@ button {
      Canva reference size:
      47
   */
-
   font-size: clamp(
     1.5rem,
     4.4vw,
@@ -256,6 +249,7 @@ button {
   transition:
     opacity 1.1s ease;
 }
+
 
 .intro-line.visible {
   opacity: 1;
@@ -424,7 +418,6 @@ button {
      Canva reference size:
      25
   */
-
   font-size: clamp(
     0.95rem,
     2.35vw,
@@ -438,7 +431,6 @@ button {
   /*
      LEFT ALIGNED
   */
-
   text-align: left;
 
   white-space: pre-line;
@@ -504,11 +496,14 @@ button {
       env(safe-area-inset-bottom)
     );
 
+  /*
+     SLIGHTLY BIGGER THAN BEFORE
+  */
   width:
     clamp(
-      7rem,
-      11vw,
-      9rem
+      3.5rem,
+      8vw,
+      6rem
     );
 
   /*
@@ -532,6 +527,7 @@ button {
   opacity: 1;
 }
 
+
 .finish-button img {
   display: block;
 
@@ -546,7 +542,7 @@ button {
 
 
 /*
-   Tiny press/bounce animation
+   Visible press/bounce animation
 */
 
 .finish-button.pressed {
@@ -555,6 +551,7 @@ button {
     420ms
     ease-in-out;
 }
+
 
 @keyframes finishTinyBounce {
 
@@ -758,6 +755,7 @@ button {
       );
   }
 
+
   .letter-message {
 
     font-size:
@@ -768,14 +766,18 @@ button {
       );
 
     line-height: 1.3;
+
   }
+
 
   .letter-message
   .message-line:first-child {
 
     margin-bottom:
       0.55em;
+
   }
+
 
   .finish-button {
 
@@ -797,6 +799,75 @@ button {
         7vw,
         4rem
       );
+
+  }
+
+}
+
+
+/* ============================================================
+   LANDSCAPE MOBILE / SMALL HEIGHT FIX
+   ============================================================ */
+
+@media (orientation: landscape) and (max-height: 700px) {
+
+  /*
+     Keep the title at the exact requested size.
+  */
+  .title-text {
+    font-size: 3rem;
+
+    max-width: 92vw;
+  }
+
+
+  /*
+     Give the complete flower artwork more usable
+     vertical space on short landscape screens.
+  */
+  .flower-grid {
+    padding:
+      7vh
+      5vw
+      6vh;
+
+    gap:
+      1vh
+      1vw;
+  }
+
+
+  /*
+     Prevent the letter message from becoming
+     excessively large on small landscape screens.
+  */
+  .letter-message-box {
+    width:
+      min(
+        46vw,
+        27rem
+      );
+  }
+
+
+  .letter-message {
+
+    font-size:
+      clamp(
+        0.9rem,
+        1.55vw,
+        1.35rem
+      );
+
+    line-height: 1.28;
+  }
+
+
+  .letter-message
+  .message-line:first-child {
+
+    margin-bottom:
+      0.6em;
   }
 
 }
@@ -817,6 +888,7 @@ button {
         45vw,
         31rem
       );
+
   }
 
 }
