@@ -1697,11 +1697,6 @@ window.addEventListener(
     "load",
     () => {
 
-        /*
-         * Make sure final scene is hidden
-         * when the page first loads.
-         */
-
         hideScene(finalScene);
 
         hideScene(letterScene);
@@ -1710,12 +1705,54 @@ window.addEventListener(
 
         hideScene(introMessage);
 
+        function waitForLandscape() {
 
-        /*
-         * Start opening sequence.
-         */
+            return new Promise(resolve => {
 
-        showOpeningScene();
+                function checkOrientation() {
+
+                    const isPortrait =
+                        window.matchMedia("(orientation: portrait)").matches;
+
+                    if (!isPortrait) {
+
+                        window.removeEventListener(
+                            "resize",
+                            checkOrientation
+                        );
+
+                        window.removeEventListener(
+                            "orientationchange",
+                            checkOrientation
+                        );
+
+                        resolve();
+
+                    }
+
+                }
+
+                window.addEventListener(
+                    "resize",
+                    checkOrientation
+                );
+
+                window.addEventListener(
+                    "orientationchange",
+                    checkOrientation
+                );
+
+                checkOrientation();
+
+            });
+
+        }
+
+        waitForLandscape().then(() => {
+
+            showOpeningScene();
+
+        });
 
     }
 );
