@@ -678,17 +678,10 @@ button {
 ) {
 
   .letter-message-box {
-
-    width:
-      min(
-        52vw,
-        24rem
-      );
-
-    height: 64%;
-
-  }
-
+    width:min(52vw,24rem);
+    height:64%;
+    left:58%;
+}
   .letter-message {
 
     font-size: clamp(.8rem,1.7vw,1.1rem);
