@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#3d251e">
+  <title>Happy Teachers' Day</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <main id="experience" aria-label="Interactive Teacher's Day tribute">
+
+    <!-- Main background -->
+    <div id="scene-bg" class="scene-bg"></div>
+
+    <!-- Opening title -->
+    <div id="intro-title" class="scene-layer title-layer" aria-hidden="true">
+      <div id="title-text" class="title-text"></div>
+    </div>
+
+    <!-- Introductory message -->
+    <div id="intro-message" class="scene-layer intro-layer" aria-hidden="true">
+      <div id="intro-line" class="intro-line"></div>
+    </div>
+
+    <!-- Flower selection -->
+    <div id="flower-scene" class="scene-layer flower-layer" aria-hidden="true">
+
+      <div id="flower-grid" class="flower-grid" aria-label="Choose a flower">
+
+        <button class="flower-hit flower-1" data-flower="1" aria-label="Flower 1"></button>
+        <button class="flower-hit flower-2" data-flower="2" aria-label="Flower 2"></button>
+        <button class="flower-hit flower-3" data-flower="3" aria-label="Flower 3"></button>
+        <button class="flower-hit flower-4" data-flower="4" aria-label="Flower 4"></button>
+        <button class="flower-hit flower-5" data-flower="5" aria-label="Flower 5"></button>
+
+        <button class="flower-hit flower-6" data-flower="6" aria-label="Flower 6"></button>
+        <button class="flower-hit flower-7" data-flower="7" aria-label="Flower 7"></button>
+        <button class="flower-hit flower-8" data-flower="8" aria-label="Flower 8"></button>
+        <button class="flower-hit flower-9" data-flower="9" aria-label="Flower 9"></button>
+        <button class="flower-hit flower-10" data-flower="10" aria-label="Flower 10"></button>
+
+      </div>
+    </div>
+
+    <!-- Magical particle effect -->
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+    <!-- Letter scene -->
+    <div id="letter-scene" class="scene-layer letter-layer" aria-hidden="true">
+
+      <!-- IMPORTANT:
+           This box stays CENTERED on the paper.
+           Text inside it is LEFT ALIGNED.
+      -->
+      <div id="letter-message-box" class="letter-message-box">
+        <div id="letter-message" class="letter-message"></div>
+      </div>
+
+      <!-- Finish button -->
+      <button id="finish-button" class="finish-button" aria-label="Finish">
+        <img src="assets/finish-button.png" alt="Finish">
+      </button>
+
+    </div>
+
+    <!-- Final scene -->
+    <div id="final-scene" class="scene-layer final-layer" aria-hidden="true">
+
+      <img
+        id="final-logo"
+        class="final-logo"
+        src="assets/logo-3.png"
+        alt="Logo"
+      >
+
+    </div>
+
+    <!-- Portrait warning -->
+    <div id="portrait-warning" class="portrait-warning">
+
+      <div class="portrait-warning-text">
+        Please turn your phone sideways to continue.
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
