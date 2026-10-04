@@ -395,9 +395,9 @@ button {
   font-family: "F3", serif;
 
   font-size: clamp(
-    0.7rem,
-    1.5vw,
-    1rem
+    0.9rem,
+    1.7vw,
+    1.2rem
   );
 
   line-height: 1.38;
@@ -691,7 +691,7 @@ button {
 
   .letter-message {
 
-    font-size: clamp(.7rem,1.5vw,1rem);
+    font-size: clamp(.9rem,1.7vw,1.2rem);
       );
 
     line-height: 1.3;
