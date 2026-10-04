@@ -103,13 +103,32 @@ let experienceFinished = false;
    ========================================================= */
 
 function wait(ms) {
+    return new Promise(async resolve => {
 
-    return new Promise(resolve => {
+        // If the phone is in portrait mode, pause completely
+        // until the user turns it sideways.
+        if (window.matchMedia("(orientation: portrait)").matches) {
+            await new Promise(done => {
+                const checkOrientation = () => {
+                    if (!window.matchMedia("(orientation: portrait)").matches) {
+                        window.removeEventListener("resize", checkOrientation);
+                        window.removeEventListener("orientationchange", checkOrientation);
+                        done();
+                    }
+                };
+
+                window.addEventListener("resize", checkOrientation);
+                window.addEventListener("orientationchange", checkOrientation);
+
+                checkOrientation();
+            });
+        }
+
+        // Start counting the requested time only after
+        // the phone is in landscape orientation.
         setTimeout(resolve, ms);
     });
-
 }
-
 
 /* =========================================================
    BACKGROUND CROSSFADE
